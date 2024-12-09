@@ -77,7 +77,7 @@ export const updateUserProfile = asyncHandler(async(req, res) => {
 			user.password = req.body.password;
 		}
 		const updateUser = await user.save();
-		res.status(200).json({
+		res.status(200).json({	
 			_id: updateUser._id,
 			name: updateUser.name,
 			email: updateUser.email
