@@ -5,9 +5,7 @@ import generateToken from '../utils/generateToken.js';
 /**@Function para autenticar usuario **/
 export const authUser = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
-  
 	const user = await User.findOne({ email });
-  
 	if (user && (await user.matchPassword(password))) {
 	  generateToken(res, user._id);
 	  res.status(200).json({
@@ -26,7 +24,6 @@ export const authUser = asyncHandler(async (req, res) => {
 export const registerUser = asyncHandler( async(req, res) => {
 	const { name, email, password } = req.body; 
 	const userExists = await User.findOne({ email });
-
 	if (userExists) {
 		res.status(400);
 		throw new Error('El usuario ya existe');
@@ -36,6 +33,7 @@ export const registerUser = asyncHandler( async(req, res) => {
 		email,
 		password
 	});
+	console.log(user);
 	if (user) {
 		generateToken(res, user._id)
 		res.status(201).json({
@@ -51,9 +49,13 @@ export const registerUser = asyncHandler( async(req, res) => {
 
 /**@Function para cerrar sesion del usuario **/
 export const logoutUser = asyncHandler(async(req, res) => {
-	res.status(200).json({
-		message: 'Logout user'
+	res.cookie('jwt', '', {
+		httpOnly: true,
+		expires: new Date(0),
 	})
+	res.status(200).json({
+		message:'Usuario desconectado'
+	});
 });
 
 /**@Funtion para obtener informacion del usuario **/
