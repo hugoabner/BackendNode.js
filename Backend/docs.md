@@ -36,3 +36,7 @@
 ==> express-async-handler
 ```
 # Middleeware de Express que facilita el manejo de errores en funciones asyncronas en Express
+```
+==> npm i -D concurrently
+```
+# concurrently es una herramienta de desarrollo que permite ejecutar multiples comandos de npm al mismo tiempo 

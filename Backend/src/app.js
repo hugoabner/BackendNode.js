@@ -20,7 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
 	origin: '*',
-	methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']}));
+	methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+	credentials: true
+
+}));
 
 app.get('/', (req, res) =>
 	 res.send('Servidor funcionando'));
